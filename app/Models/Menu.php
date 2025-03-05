@@ -16,6 +16,7 @@ class Menu extends Model
         'url',
         'parent_id',
         'permission',
+        'order',
     ];
 
     // Relasi ke parent menu

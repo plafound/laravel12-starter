@@ -36,16 +36,24 @@ class MenuController extends Controller
             $url = '/' . $url;
         }
 
-        Permission::create(['name' => $request->permission]);
+        // Permission::create(['name' => $request->permission]);
 
-        $menu = Menu::create([
+        // Tentukan urutan menu berdasarkan urutan terbesar
+        if($request->parent_id == null){
+            $orderMax = Menu::whereNull('parent_id')->max('order');
+        }else{
+            $orderMax = Menu::where('parent_id', $request->parent_id)->max('order');
+        }
+        $order = $orderMax + 1;
+        $data = [
             'name' => $request->name,
             'url' => $url,
             'icon' => $request->icon,
             'parent_id' => $request->parent_id,
             'permission' => $request->permission,
-        ]);
-
+            'order' => $order,
+        ];
+        Menu::create($data);
         return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
     }
 

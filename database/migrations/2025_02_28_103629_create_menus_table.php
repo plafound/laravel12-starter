@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('permission')->unique(); // Nama permission untuk menu ini
             $table->unsignedBigInteger('parent_id')->nullable(); // Jika menu ini submenu
             $table->foreign('parent_id')->references('id')->on('menus')->onDelete('cascade');
-            $table->integer('order')->default(0); // Urutan menu
+            $table->integer('order')->nullable(); // Urutan menu
             $table->timestamps();
         });
     }
