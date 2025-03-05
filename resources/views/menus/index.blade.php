@@ -7,8 +7,10 @@
     <h2>Manajemen Menu</h2>
     <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg"></i> Tambah</a>
 
-    @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
+    @if(session('success'))
+    <div id="success-message" data-message="{{ session('success') }}"></div>
+    @elseif(session('error'))
+    <div id="error-message" data-message="{{ session('error')}}"></div>
     @endif
 
     <table class="table table-striped">
@@ -41,9 +43,9 @@
                         @csrf
                         <button type="submit" class="btn btn-primary">⬇️</button>
                     </form>
-                    <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
+                    <form id="delete-form-{{$menu->id}}" action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Hapus menu ini?')"><i class="bi bi-trash3-fill"></i></button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{$menu->id}}')"><i class="bi bi-trash3-fill"></i></button>
                     </form>
                 </td>
             </tr>
@@ -64,9 +66,9 @@
                         @csrf
                         <button type="submit" class="btn btn-primary">⬇️</button>
                     </form>
-                    <form action="{{ route('menus.destroy', $submenu->id) }}" method="POST" style="display:inline;">
+                    <form id="delete-form-{{$submenu->id}}" action="{{ route('menus.destroy', $submenu->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Hapus menu ini?')"><i class="bi bi-trash3-fill"></i></button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{$submenu->id}}')"><i class="bi bi-trash3-fill"></i></button>
                     </form>
                 </td>
             </tr>
@@ -75,4 +77,21 @@
         </tbody>
     </table>
 </div>
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        })
+    }
+</script>
 @endsection

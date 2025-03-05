@@ -13,6 +13,10 @@
     <link rel="stylesheet" crossorigin href="{{asset('assets/compiled/css/app.css')}}">
     <link rel="stylesheet" crossorigin href="{{asset('assets/compiled/css/iconly.css')}}">
     <link rel="stylesheet" crossorigin href="{{asset('assets/compiled/css/app-dark.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}"> -->
+    <link rel="stylesheet" href="{{asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('tambahan-head')
 </head>
 
@@ -34,7 +38,7 @@
                                         @if (Auth::user()->avatar)
                                         <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" />
                                         @else
-                                        <img src="./assets/compiled/jpg/2.jpg" alt="Avatar" />
+                                        <img src="{{ asset('assets/compiled/jpg/2.jpg') }}" alt="Avatar" />
                                         @endif
                                     </div>
                                     <div class="text">
@@ -78,7 +82,37 @@
     <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
     <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-
+    <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let successElement = document.getElementById("success-message");
+            let errorElement = document.getElementById("error-message");
+            if (successElement) {
+                let successMessage = successElement.getAttribute("data-message");
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: successMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+            if (errorElement) {
+                let errorMessage = errorElement.getAttribute("data-message");
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: errorMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

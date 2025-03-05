@@ -1,10 +1,18 @@
 @extends('layouts.app-v2')
 
 @section('title', 'Manajemen Role & Permission')
+
 @section('content')
 <div class="container">
     <h2>Manajemen Role & Permission</h2>
     <a href="{{ route('roles.create') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg"></i> Tambah</a>
+
+    @if(session('success'))
+    <div id="success-message" data-message="{{ session('success') }}"></div>
+    @elseif(session('error'))
+    <div id="error-message" data-message="{{ session('error')}}"></div>
+    @endif
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -32,9 +40,9 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
+                    <form id="delete-form-{{$role->id}}" action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Hapus role ini?')"><i class="bi bi-trash3-fill"></i></button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{$role->id}}')"><i class="bi bi-trash3-fill"></i></button>
                     </form>
                 </td>
             </tr>
@@ -42,4 +50,21 @@
         </tbody>
     </table>
 </div>
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        })
+    }
+</script>
 @endsection
