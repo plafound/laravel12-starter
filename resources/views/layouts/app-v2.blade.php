@@ -41,7 +41,7 @@
                                         @if (Auth::user()->avatar)
                                         <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" />
                                         @else
-                                        <img src="{{ asset('assets/compiled/jpg/2.jpg') }}" alt="Avatar" />
+                                        <img src="{{ asset('assets/compiled/jpg/no-ava.jpg') }}" alt="Avatar" />
                                         @endif
                                     </div>
                                     <div class="text">

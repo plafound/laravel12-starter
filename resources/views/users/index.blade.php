@@ -16,11 +16,12 @@
     <table id="users-table" class="table table-striped">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Aksi</th>
+                <th style="width: 15px;">No</th>
+                <th class="text-center">Avatar</th>
+                <th class="text-center">Nama</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Role</th>
+                <th class="text-center">Aksi</th>
             </tr>
         </thead>
         <!-- isian body table akan diisi oleh datatables -->
@@ -35,6 +36,12 @@
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'avatar',
+                    name: 'avatar',
                     orderable: false,
                     searchable: false
                 },

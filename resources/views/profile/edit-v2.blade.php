@@ -82,7 +82,7 @@
                                     @if (Auth::user()->avatar)
                                     <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" />
                                     @else
-                                    <img src="./assets/compiled/jpg/2.jpg" alt="Avatar" />
+                                    <img src="./assets/compiled/jpg/no-ava.jpg" alt="Avatar" />
                                     @endif
                                 </div>
                                 <form id="uploadForm" action="{{ route('profile.avatar.update') }}" method="POST" enctype="multipart/form-data">

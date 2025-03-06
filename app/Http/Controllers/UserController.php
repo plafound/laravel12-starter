@@ -15,6 +15,14 @@ class UserController extends Controller
             $data = User::with('roles')->get();
             return datatables()->of($data)
                 ->addIndexColumn()
+                ->addColumn('avatar', function ($row) {
+                    $avatarUrl = asset('storage/' . $row->avatar);
+                    if ($row->avatar) {
+                        return '<img src="' . $avatarUrl . '" class="rounded-circle" width="50" height="50" />';
+                    } else {
+                        return '<img src="' . asset('assets/compiled/jpg/no-ava.jpg') . '" class="rounded-circle" width="50" height="50" />';
+                    }
+                })
                 ->addColumn('role', function ($row) {
                     return $row->roles->first()->name;
                 })
@@ -31,7 +39,7 @@ class UserController extends Controller
                     </form>
                 ';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['avatar', 'action'])
                 ->make(true);
         }
     }
