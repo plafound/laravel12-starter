@@ -17,11 +17,11 @@
         <thead>
             <tr>
                 <th style="width: 15px;">No</th>
-                <th class="text-center">Avatar</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Role</th>
-                <th class="text-center">Aksi</th>
+                <th>Avatar</th>
+                <th>Nama</thclass=>
+                <th>Email</th>
+                <th>Role</th=>
+                <th>Aksi</th=>
             </tr>
         </thead>
         <!-- isian body table akan diisi oleh datatables -->
