@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="mb-4"><a href="{{route('menus.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah User</h3>
+    <h3 class="mb-4"><a href="{{route('users.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah User</h3>
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="mb-3">

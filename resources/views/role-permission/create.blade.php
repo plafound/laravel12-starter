@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="mb-4"><a href="{{route('menus.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah Role</h3>
+    <h3 class="mb-4"><a href="{{route('roles.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah Role</h3>
 
     <form action="{{ route('roles.store') }}" method="POST">
         @csrf

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="mb-4"><a href="{{route('menus.index')}}"><i class="bi bi-chevron-left"></i></a>  Edit User</h3>
+    <h3 class="mb-4"><a href="{{route('users.index')}}"><i class="bi bi-chevron-left"></i></a>  Edit User</h3>
     <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf @method('PUT')
         <div class="mb-3">

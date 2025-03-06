@@ -39,9 +39,9 @@ class MenuController extends Controller
         // Permission::create(['name' => $request->permission]);
 
         // Tentukan urutan menu berdasarkan urutan terbesar
-        if($request->parent_id == null){
+        if ($request->parent_id == null) {
             $orderMax = Menu::whereNull('parent_id')->max('order');
-        }else{
+        } else {
             $orderMax = Menu::where('parent_id', $request->parent_id)->max('order');
         }
         $order = $orderMax + 1;
