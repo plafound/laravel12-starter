@@ -13,34 +13,53 @@
     <div id="error-message" data-message="{{ session('error')}}"></div>
     @endif
 
-    <table class="table table-striped">
+    <table id="users-table" class="table table-striped">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Aksi</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ implode(', ', $user->roles->pluck('name')->toArray()) }}</td>
-                <td>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                    <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-                        @csrf @method('DELETE')
-                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{$user->id}}')"><i class="bi bi-trash3-fill"></i></button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+        <!-- isian body table akan diisi oleh datatables -->
     </table>
 </div>
 <script>
+    $(document).ready(function() {
+        $('#users-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('users.datatables') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'role',
+                    name: 'role'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ]
+        });
+    });
+
     function confirmDelete(id) {
         Swal.fire({
             title: 'Apakah Anda yakin?',

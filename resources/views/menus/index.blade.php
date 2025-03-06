@@ -13,10 +13,10 @@
     <div id="error-message" data-message="{{ session('error')}}"></div>
     @endif
 
-    <table class="table table-striped">
+    <table id="menus-table" class="table table-striped">
         <thead>
             <tr>
-                <th>No</th>
+                <th>Urutan</th>
                 <th>Nama</th>
                 <th>URL</th>
                 <th>Ikon</th>

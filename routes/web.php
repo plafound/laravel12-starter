@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'permission:users'])->group(function () {
     Route::resource('users', UserController::class)->except(['show']);
+    Route::get('users/datatables', [UserController::class, 'table'])->name('users.datatables');
 });
 
 Route::middleware(['auth', 'permission:roles'])->group(function () {
@@ -41,6 +42,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('menus', MenuController::class);
     Route::post('/menus/check', [MenuController::class, 'check'])->name('menus.check');
     Route::post('/menus/{id}/move/{direction}', [MenuController::class, 'move'])->name('menus.move');
+    Route::get('/menus/datatables', [MenuController::class, 'table'])->name('menus.datatables');
 });
 
 

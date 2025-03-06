@@ -9,10 +9,36 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function table(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::with('roles')->get();
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('role', function ($row) {
+                    return $row->roles->first()->name;
+                })
+                ->addColumn('action', function ($row) {
+                    return '
+                    <a href="' . route('users.edit', $row->id) . '" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <form id="delete-form-' . $row->id . '" action="' . route('users.destroy', $row->id) . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . method_field("DELETE") . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $row->id . ')">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </form>
+                ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
     public function index()
     {
-        $users = User::with('roles')->get();
-        return view('users.index', compact('users'));
+        return view('users.index');
     }
 
     public function create()
