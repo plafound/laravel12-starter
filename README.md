@@ -55,7 +55,7 @@ Password: password
 
 ## 🛡️ Aktifkan semua role-permission untuk admin
 
-Setelah login menggunakan akun admin. Maka akan otomatis masuk halaman dashboard namun terkendala permission karena belum diaktifkan. Caranya ?
+Setelah login menggunakan akun admin. Maka akan otomatis masuk halaman dashboard untuk membuka semua menu. Caranya ?
 
 ```
 # Masuk ke URL
