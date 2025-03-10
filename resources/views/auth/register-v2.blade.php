@@ -10,9 +10,13 @@
     <script src="https://assets.codepen.io/16327/MorphSVGPlugin3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Register | {{ env('APP_NAME') }}</title>
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/register.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
+    @if (session('error'))
+    <div id="error-message" data-message="{{ session('error') }}"></div>
+    @endif
     <div class="form">
         <div class="svgContainer">
             <div>
@@ -120,10 +124,16 @@
             <div class="inputGroup inputGroup1">
                 <label for="registerNama" id="registerNamaLabel">Nama</label>
                 <input type="text" id="nama" name="nama" required />
+                @error('nama')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="inputGroup inputGroup1">
                 <label for="registerEmail" id="registerEmailLabel">Email</label>
                 <input type="email" id="email" name="email" required />
+                @error('email')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="inputGroup inputGroup2">
                 <label for="registerPassword" id="registerPasswordLabel">Password</label>
@@ -140,6 +150,24 @@
         </form>
     </div>
     <script src="{{asset('assets/compiled/js/register.js')}}"></script>
+    <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let errorElement = document.getElementById("error-message");
+            if (errorElement) {
+                let errorMessage = errorElement.getAttribute("data-message");
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: errorMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
