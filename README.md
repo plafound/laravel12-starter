@@ -4,7 +4,7 @@ Laravel12-Starter adalah starter project berbasis Laravel 12 yang telah dilengka
 
 ## ✨ Fitur
 
-- 🔐 **Autentikasi** (Login, Register, Logout, Reset Password)
+- 🔐 **Autentikasi** (Login, Register, Logout)
 - 🛡️ **Role & Permission** (Menggunakan Spatie Laravel Permission)
 - 📋 **Manajemen Menu & User**
 - 🎨 **Template UI with Mazer** (Opsional, bisa dikembangkan lebih lanjut)
@@ -55,13 +55,16 @@ Password: password
 
 ## 🛡️ Aktifkan semua role-permission untuk admin
 
-Setelah login menggunakan akun admin. Maka akan otomatis masuk halaman dashboard untuk membuka semua menu. Caranya ?
+Setelah login menggunakan akun admin. Maka akan otomatis masuk halaman dashboard. Untuk membuka semua menu. Caranya ?
 
 ```
 # Masuk ke URL
 https://<your_domain>/roles
 ```
-dan aktifkan semua permission untuk admin. maka Menu lainnya juga akan terbuka.
+dan aktifkan semua permission untuk admin. maka Menu lainnya juga akan otomatis terbuka ketika permission diaktifkan.
+Begitu juga dengan user lainnya. 
+
+So, manage your Role dan Permission wisely.
 
 ## ✨ ENJOY IT.
 
