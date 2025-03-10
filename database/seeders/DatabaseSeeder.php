@@ -86,9 +86,16 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'user']);
 
+        $adminRole = Role::where('name', 'admin')->first();
+        $adminRole->syncPermissions('roles','dashboard');
+        $adminRole->save();
+        $userRole = Role::where('name', 'user')->first();
+        $userRole->syncPermissions('dashboard');
+        $userRole->save();
+
+
         $admin = User::where('email', 'admin@mail.com')->first();
         $admin->assignRole('admin');
-        $admin->syncPermissions('roles');
         $admin->save();
         $user = User::where('email', 'user@mail.com')->first();
         $user->assignRole('user');

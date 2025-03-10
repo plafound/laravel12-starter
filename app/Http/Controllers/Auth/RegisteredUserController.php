@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+use function Laravel\Prompts\error;
+use function Laravel\Prompts\password;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +24,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        // return view('auth.register');
+        return view('auth.register-v2');
     }
 
     /**
@@ -29,17 +35,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // $data=$request->all();
+        // dd($data);
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required'],
         ]);
+        
+        if($request->password != $request->confirm_password){
+            return redirect()->route('register')->with('error', 'Password tidak sama');
+        }
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->syncRoles('user');
 
         event(new Registered($user));
 

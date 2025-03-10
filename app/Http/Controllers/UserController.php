@@ -24,7 +24,7 @@ class UserController extends Controller
                     }
                 })
                 ->addColumn('role', function ($row) {
-                    return $row->roles->first()->name;
+                    return optional($row->roles->first())->name ?? '-';
                 })
                 ->addColumn('action', function ($row) {
                     return '
