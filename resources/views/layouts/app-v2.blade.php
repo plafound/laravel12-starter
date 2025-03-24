@@ -116,6 +116,11 @@
             }
         });
     </script>
+    <script>
+    document.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+    });
+</script>
 </body>
 
 </html>
