@@ -282,7 +282,7 @@
                 <!-- <form action="#" method="post"> -->
                 <h2>Sign Up</h2>
                 <div class="form">
-                    <form id="registerForm" action="{{ route('register') }}" method="POST">
+                    <form id="registerForm" action="{{ route('register') }}" method="POST" autocomplete="off">
                         @csrf
                         <div class="inputBox">
                             <input id="nama" name="nama" type="text" required />

@@ -122,7 +122,7 @@
                 </svg>
             </div>
         </div>
-        <form id="loginForm" action="{{ route('login') }}" method="POST">
+        <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
             @csrf
             <div class="inputGroup inputGroup1">
                 <label for="loginEmail" id="loginEmailLabel">Email</label>

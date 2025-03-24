@@ -285,7 +285,7 @@
             <div class="content">
                 <h2>Sign In</h2>
                 <div class="form">
-                    <form id="loginForm" action="{{ route('login') }}" method="POST">
+                    <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
                         @csrf
                         <div class="inputBox">
                             <input id="email" name="email" type="email" required />

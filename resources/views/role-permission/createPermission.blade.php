@@ -6,7 +6,7 @@
 <div class="container">
     <h3 class="mb-4"><a href="{{route('permission.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah Permission</h3>
 
-    <form action="{{ route('permission.store') }}" method="POST">
+    <form action="{{ route('permission.store') }}" method="POST" autocomplete="off">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nama Permission</label>

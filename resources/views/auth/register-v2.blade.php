@@ -119,7 +119,7 @@
                 </svg>
             </div>
         </div>
-        <form id="registerForm" action="{{ route('register') }}" method="POST">
+        <form id="registerForm" action="{{ route('register') }}" method="POST" autocomplete="off">
             @csrf
             <div class="inputGroup inputGroup1">
                 <label for="registerNama" id="registerNamaLabel">Nama</label>

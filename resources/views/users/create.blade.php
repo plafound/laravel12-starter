@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h3 class="mb-4"><a href="{{route('users.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah User</h3>
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST" autocomplete="off">
         @csrf
         <div class="mb-3">
             <label>Nama</label>

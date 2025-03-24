@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h3 class="mb-4"><a href="{{route('menus.index')}}"><i class="bi bi-chevron-left"></i></a>  Tambah Menu</h3>
-    <form action="{{ route('menus.store') }}" method="POST">
+    <form action="{{ route('menus.store') }}" method="POST"  autocomplete="off">
         @csrf
         <div class="mb-3">
             <label>Nama Menu</label>
