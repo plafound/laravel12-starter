@@ -4,8 +4,10 @@
 
 @section('content')
 <div class="container">
-    <h2>Manajemen Role & Permission</h2>
-    <a href="{{ route('roles.create') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg"></i> Tambah</a>
+    <div class="d-flex justify-content-between">
+        <a href="{{ route('roles.create') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg"></i> Role</a>
+        <a href="{{ route('permission.index') }}" class="btn btn-success mb-3" style="margin-inline: 10px;" ;"><i class="bi bi-person-fill-lock"></i> Manage Permission</a>
+    </div>
 
     @if(session('success'))
     <div id="success-message" data-message="{{ session('success') }}"></div>

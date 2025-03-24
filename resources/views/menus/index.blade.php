@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container">
-    <h2>Manajemen Menu</h2>
     <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg"></i> Tambah</a>
 
     @if(session('success'))
@@ -37,11 +36,11 @@
                 <td>
                     <form action="{{ route('menus.move', ['id' => $menu->id, 'direction' => 'up']) }}" method="POST" style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary" {{ $menu->order == 1 ? 'disabled' : '' }}>⬆️</button>
+                        <button type="submit" class="btn"><i class="bi bi-chevron-up"></i></button>
                     </form>
                     <form action="{{ route('menus.move', ['id' => $menu->id, 'direction' => 'down']) }}" method="POST" style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary">⬇️</button>
+                        <button type="submit" class="btn"><i class="bi bi-chevron-down"></i></button>
                     </form>
                     <form id="delete-form-{{$menu->id}}" action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
@@ -60,11 +59,11 @@
                 <td>
                     <form action="{{ route('menus.move', ['id' => $submenu->id, 'direction' => 'up']) }}" method="POST" style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary" {{ $menu->order == 1 ? 'disabled' : '' }}>⬆️</button>
+                        <button type="submit" class="btn"><i class="bi bi-chevron-up"></i></button>
                     </form>
                     <form action="{{ route('menus.move', ['id' => $submenu->id, 'direction' => 'down']) }}" method="POST" style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary">⬇️</button>
+                        <button type="submit" class="btn"><i class="bi bi-chevron-down"></i></button>
                     </form>
                     <form id="delete-form-{{$submenu->id}}" action="{{ route('menus.destroy', $submenu->id) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')

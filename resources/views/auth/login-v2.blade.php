@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://assets.codepen.io/16327/MorphSVGPlugin3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Login | {{ env('APP_NAME') }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/compiled/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/compiled/css/login-v2.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 

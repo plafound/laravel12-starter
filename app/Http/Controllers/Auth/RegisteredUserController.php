@@ -24,8 +24,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        // return view('auth.register');
-        return view('auth.register-v2');
+        return view('auth.register');
+        // return view('auth.register-v2');
     }
 
     /**
@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
             'password' => ['required','min:8'],
         ]);
         
-        if($request->password != $request->confirm_password){
+        if($request->password != $request->password_confirmation){
             return redirect()->route('register')->with('error', 'Password tidak sama');
         }
 

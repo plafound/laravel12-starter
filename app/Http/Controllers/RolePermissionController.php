@@ -38,6 +38,7 @@ class RolePermissionController extends Controller
 
         return redirect()->route('role.permission.index')->with('success', 'Role berhasil ditambahkan!');
     }
+
     public function destroy(Role $role)
     {
         $role->delete();
@@ -47,6 +48,45 @@ class RolePermissionController extends Controller
     public function check(Request $request)
     {
         $exists = Role::where('name', $request->name)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
+    public function indexPermission()
+    {
+        $permissions = Permission::get();
+        return view('role-permission.indexPermission', compact('permissions'));
+    }
+
+    public function createPermission()
+    {
+        return view('role-permission.createPermission');
+    }
+
+    public function storePermission(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:permissions,name',
+        ]);
+
+        Permission::create(['name' => $request->name, 'guard' => 'web', 'is_menu' => false]);
+
+        return redirect()->route('permission.index')->with('success', 'Role berhasil ditambahkan!');
+    }
+
+    public function destroyPermission(Permission $permission)
+    {
+        if ($permission->is_menu) {
+            return redirect()->back()->with('error', 'Permission ini berasal dari menu dan tidak bisa dihapus langsung!');
+        }
+
+        $permission->delete();
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        return back()->with('success', 'Permission berhasil dihapus!');
+    }
+
+    public function checkPermission(Request $request)
+    {
+        $exists = Permission::where('name', $request->name)->exists();
         return response()->json(['exists' => $exists]);
     }
 }

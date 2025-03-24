@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
 
         $permissions = ['dashboard', 'setting', 'roles', 'users', 'menus'];
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web', 'is_menu' => true]);
         }
 
 

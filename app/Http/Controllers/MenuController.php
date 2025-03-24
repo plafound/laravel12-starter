@@ -36,7 +36,7 @@ class MenuController extends Controller
             $url = '/' . $url;
         }
 
-        // Permission::create(['name' => $request->permission]);
+        Permission::create(['name' => $request->permission, 'guard_name' => 'web', 'is_menu' => true]);
 
         // Tentukan urutan menu berdasarkan urutan terbesar
         if ($request->parent_id == null) {
@@ -94,18 +94,32 @@ class MenuController extends Controller
         if (!$menu) {
             return redirect()->back()->with('error', 'Menu tidak ditemukan');
         }
-        // Tentukan perubahan urutan
-        $newOrder = ($direction == 'up') ? $menu->order - 1 : $menu->order + 1;
-
-
-        // Cari menu lain dengan urutan yang ingin ditukar
-        $swapMenu = Menu::where('order', $newOrder)->first();
-        if ($swapMenu) {
-
-            // Tukar nilai order antara dua menu
-            Menu::where('id', $swapMenu->id)->update(['order' => $menu->order]);
-            Menu::where('id', $menu->id)->update(['order' => $newOrder]);
+    
+        // Cek parent_id agar pemindahan hanya dalam level yang sama
+        $parentId = $menu->parent_id;
+    
+        // Cek batas atas & bawah dalam parent yang sama
+        $query = Menu::where('parent_id', $parentId);
+    
+        if ($direction == 'up' && $query->min('order') == $menu->order) {
+            return redirect()->back()->with('error', 'Menu sudah di posisi teratas dalam parent ini');
         }
+        if ($direction == 'down' && $query->max('order') == $menu->order) {
+            return redirect()->back()->with('error', 'Menu sudah di posisi terbawah dalam parent ini');
+        }
+    
+        // Tentukan order baru
+        $newOrder = ($direction == 'up') ? $menu->order - 1 : $menu->order + 1;
+    
+        // Cari menu lain dengan urutan yang ingin ditukar dalam parent yang sama
+        $swapMenu = Menu::where('parent_id', $parentId)->where('order', $newOrder)->first();
+    
+        if ($swapMenu) {
+            // Swap nilai order
+            $swapMenu->update(['order' => $menu->order]);
+            $menu->update(['order' => $newOrder]);
+        }
+    
         return redirect()->route('menus.index')->with('success', 'Urutan menu berhasil diperbarui');
     }
 }

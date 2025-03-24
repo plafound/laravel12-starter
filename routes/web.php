@@ -36,6 +36,11 @@ Route::middleware(['auth', 'permission:roles'])->group(function () {
     Route::get('/roles/check', [RolePermissionController::class, 'check'])->name('roles.check');
     Route::delete('/roles/{role}/destroy', [RolePermissionController::class, 'destroy'])->name('roles.destroy');
 
+    Route::get('/roles/permission', [RolePermissionController::class, 'indexPermission'])->name('permission.index');
+    Route::get('/roles/permission/create', [RolePermissionController::class, 'createPermission'])->name('permission.create');
+    Route::post('/roles/permission/store', [RolePermissionController::class, 'storePermission'])->name('permission.store');
+    Route::get('/roles/permission/check', [RolePermissionController::class, 'checkPermission'])->name('permission.check');
+    Route::delete('/roles/permission/{permission}/destroy', [RolePermissionController::class, 'destroyPermission'])->name('permission.destroy');
 });
 
 Route::middleware(['auth','role:admin'])->group(function () {
